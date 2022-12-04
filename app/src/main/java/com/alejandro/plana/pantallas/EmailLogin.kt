@@ -1,6 +1,7 @@
 package com.alejandro.plana.pantallas
 
 import android.util.Patterns
+import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -16,6 +17,7 @@ import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -111,8 +113,14 @@ fun MantenerIniciada() {
 
 @Composable
 fun LoginButton(loginEnable: Boolean, navController: NavController) {
+    val context = LocalContext.current
     Button(
-        onClick = { navController.navigate("home") },
+        onClick = {
+            navController.navigate("home")
+            Toast.makeText(
+                context, "Has sido registrado correctamente", Toast.LENGTH_SHORT
+            ).show()
+        },
         enabled = loginEnable,
         shape = RoundedCornerShape(50.dp),
         modifier = Modifier
