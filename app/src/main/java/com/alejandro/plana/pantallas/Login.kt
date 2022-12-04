@@ -1,5 +1,6 @@
 package com.alejandro.plana.pantallas
 
+import android.util.Patterns
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -87,4 +88,5 @@ fun SignUp(navController: NavHostController) {
 
 
 }
+
 

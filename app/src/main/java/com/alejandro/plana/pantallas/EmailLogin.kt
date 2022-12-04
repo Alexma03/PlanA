@@ -26,8 +26,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.alejandro.plana.pantallas.componentes.ColorTextorequisitos
 import com.alejandro.plana.ui.theme.PlanA
 import com.alejandro.plana.pantallas.componentes.ImageLogo
+import com.alejandro.plana.pantallas.componentes.TextoRequisitos
 
 @Composable
 fun EmailLoginScreen(navController: NavController) {
@@ -59,10 +61,20 @@ fun EmailLogin(navController: NavController) {
                 email = it
                 isLoginEnable = EnableLogin(email, password)
             }
+            TextoRequisitos(
+                texto = "Un formato de email valido",
+                modifier = Modifier.align(Alignment.Start),
+                color = ColorTextorequisitos(email, 5)
+            )
             PasswordLogin(password) {
                 password = it
                 isLoginEnable = EnableLogin(email, password)
             }
+            TextoRequisitos(
+                texto = "6 caracteres minimo",
+                modifier = Modifier.align(Alignment.Start),
+                color = ColorTextorequisitos(password, 2)
+            )
             LoginButton(isLoginEnable, navController)
             MantenerIniciada()
         }
@@ -130,7 +142,7 @@ fun EnableLogin(
     email: String, password: String,
 ): Boolean =
     Patterns.EMAIL_ADDRESS.matcher(email).matches() &&
-            password.length > 8
+            password.length > 5
 
 @Composable
 fun PasswordLogin(password: String, onTextchanged: (String) -> Unit) {

@@ -36,7 +36,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.alejandro.plana.objeto.Persona
+import com.alejandro.plana.pantallas.componentes.ColorTextorequisitos
 import com.alejandro.plana.pantallas.componentes.ImageLogo
+import com.alejandro.plana.pantallas.componentes.TextoRequisitos
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import com.alejandro.plana.ui.theme.BlueTwitter
@@ -161,42 +163,7 @@ fun EnableSingUp(
     Patterns.EMAIL_ADDRESS.matcher(email).matches() && password.length > 5 &&
             name.isNotEmpty() && repeatPassword == password
 
-            //&& codigoPostal.length > 4 (conseguir que funcione)
-
-
-fun ColorTextorequisitos(texto: String, condicion: Int = 1, repeatPassword: String = ""): Color {
-    if (condicion == 1) {
-        if (texto.isBlank()) {
-            return Color.Red
-        } else {
-            return Color.Gray
-        }
-    } else if (condicion == 2) {
-        if (texto.length < 6) {
-            return Color.Red
-        } else {
-            return Color.Gray
-        }
-    } else if (condicion == 3) {
-        if (texto == repeatPassword){
-            return Color.Gray
-        } else {
-            return Color.Red
-        }
-    } else if (condicion == 4) {
-        if (texto.length < 5) {
-            return Color.Red
-        } else {
-            return Color.Gray
-        }
-    } else {
-        if (Patterns.EMAIL_ADDRESS.matcher(texto).matches()) {
-            return Color.Gray
-        } else {
-            return Color.Red
-        }
-    }
-}
+            //&& codigoPostal.length > 4 (conseguir que funcione
 
 @Composable
 fun Login(navController: NavHostController) {
@@ -233,18 +200,7 @@ fun Login(navController: NavHostController) {
 
 }
 
-@Composable
-fun TextoRequisitos(texto: String, modifier: Modifier, color: Color) {
-    Text(
-        text = "* $texto",
-        style = TextStyle(
-            color = color,
-            fontWeight = FontWeight.Light,
-            fontSize = 12.sp
-        ),
-        modifier = modifier.padding(top = 2.dp, bottom = 5.dp, start = 20.dp)
-    )
-}
+
 
 
 
