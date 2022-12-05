@@ -7,17 +7,16 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.updatePadding
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.alejandro.plana.navigation.Routes
 import com.alejandro.plana.ui.theme.PlanATheme
 import com.alejandro.plana.pantallas.EmailLoginScreen
 import com.alejandro.plana.pantallas.HomeScreen
 import com.alejandro.plana.pantallas.LoginScreen
 import com.alejandro.plana.pantallas.RegistroScreen
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,11 +29,11 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background
                 ) {
                     val navigationController = rememberNavController()
-                    NavHost(navController = navigationController, startDestination = "login") {
-                        composable("login") { LoginScreen(navigationController) }
-                        composable("registro") { RegistroScreen(navigationController) }
-                        composable("home") { HomeScreen(navigationController) }
-                        composable("email") { EmailLoginScreen(navigationController) }
+                    NavHost(navController = navigationController, startDestination = Routes.Login.route) {
+                        composable(Routes.Login.route) { LoginScreen(navigationController) }
+                        composable(Routes.Registro.route) { RegistroScreen(navigationController) }
+                        composable(Routes.Home.route) { HomeScreen(navigationController) }
+                        composable(Routes.EmailLogin.route) { EmailLoginScreen(navigationController) }
                     }
                 }
             }

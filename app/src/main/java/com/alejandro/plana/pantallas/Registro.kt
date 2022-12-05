@@ -35,6 +35,8 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.alejandro.plana.navigation.Routes
+import com.alejandro.plana.navigation.Routes.*
 import com.alejandro.plana.objeto.Persona
 import com.alejandro.plana.pantallas.componentes.ColorTextorequisitos
 import com.alejandro.plana.pantallas.componentes.ImageLogo
@@ -268,7 +270,7 @@ fun SignUpButton(
                     context, "Las contraseñas no coinciden", Toast.LENGTH_SHORT
                 ).show()
             } else {
-                navController.navigate("email")
+                navController.navigate(EmailLogin.route)
                 Toast.makeText(
                     context, "$name has sido registrado correctamente", Toast.LENGTH_SHORT
                 ).show()

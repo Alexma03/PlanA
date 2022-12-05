@@ -28,6 +28,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.alejandro.plana.navigation.Routes
+import com.alejandro.plana.navigation.Routes.*
 import com.alejandro.plana.pantallas.componentes.ColorTextorequisitos
 import com.alejandro.plana.ui.theme.PlanA
 import com.alejandro.plana.pantallas.componentes.ImageLogo
@@ -116,7 +118,7 @@ fun LoginButton(loginEnable: Boolean, navController: NavController) {
     val context = LocalContext.current
     Button(
         onClick = {
-            navController.navigate("home")
+            navController.navigate(Home.route)
             Toast.makeText(
                 context, "Has sido registrado correctamente", Toast.LENGTH_SHORT
             ).show()
@@ -154,7 +156,7 @@ fun EnableLogin(
 
 @Composable
 fun PasswordLogin(password: String, onTextchanged: (String) -> Unit) {
-    var passwordVisibility by remember { mutableStateOf(false) }
+    var passwordVisibility by rememberSaveable { mutableStateOf(false) }
     TextField(
         value = password,
         onValueChange = { onTextchanged(it) },

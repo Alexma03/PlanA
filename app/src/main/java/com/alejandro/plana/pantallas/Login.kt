@@ -17,6 +17,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.alejandro.plana.navigation.Routes
+import com.alejandro.plana.navigation.Routes.*
 import com.alejandro.plana.pantallas.componentes.botones.Email
 import com.alejandro.plana.pantallas.componentes.botones.Facebook
 import com.alejandro.plana.pantallas.componentes.botones.Google
@@ -78,7 +80,7 @@ fun SignUp(navController: NavHostController) {
                 text = "Sign up.",
                 Modifier
                     .padding(horizontal = 8.dp)
-                    .clickable(onClick = { navController.navigate("registro") }),
+                    .clickable(onClick = { navController.navigate(Registro.route) }),
                 fontSize = 15.sp,
                 color = BlueTwitter,
                 fontWeight = FontWeight.ExtraBold
