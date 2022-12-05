@@ -37,11 +37,6 @@ fun Google(navController: NavController) {
 
     val context = LocalContext.current
     val token = stringResource(R.string.default_web_client_id)
-    val launcherNav = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.StartActivityForResult()
-    ) {
-        navController.navigate(Routes.Home.route)
-    }
     val launcher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.StartActivityForResult(),
     ) {
@@ -56,6 +51,7 @@ fun Google(navController: NavController) {
 
                         }
                     }
+                navController.navigate(Routes.Home.route)
             }
             catch (e: ApiException) {
                 Log.w("TAG", "GoogleSign in Failed", e)
