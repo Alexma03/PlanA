@@ -72,6 +72,13 @@ dependencies {
     //Google Auth
     implementation 'com.google.android.gms:play-services-auth:20.4.0'
 
+    //ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.0-alpha03")
+
+    //Interoperability
+    implementation("androidx.activity:activity-compose:1.7.0-alpha02")
+
+
 
 
 }

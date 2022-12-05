@@ -5,6 +5,7 @@ sealed class Routes(val route: String) {
     object Registro:Routes("registro")
     object Home:Routes("home")
     object EmailLogin:Routes("email")
+    object GoogleLogin:Routes("google")
 
 
 
