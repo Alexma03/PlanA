@@ -1,5 +1,8 @@
 package com.alejandro.plana.pantallas.componentes.botones
 
+import android.util.Log
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -11,7 +14,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -19,10 +24,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.alejandro.plana.R
+import com.alejandro.plana.navigation.Routes
 import com.alejandro.plana.ui.theme.BlueGoogle
+
 
 @Composable
 fun Google(navController: NavController) {
+
     Card(
         elevation = 15.dp,
         shape = RoundedCornerShape(50.dp),
@@ -31,9 +39,8 @@ fun Google(navController: NavController) {
             .padding(10.dp)
             .wrapContentSize(Alignment.Center)
             .fillMaxWidth()
-            .clickable(onClick = { navController.navigate("home") })
-
-    ) {
+            .clickable(onClick = { navController.navigate(Routes.Home.route) })
+    ){
         Row(
             modifier = Modifier
                 .wrapContentHeight(Alignment.CenterVertically)
@@ -59,7 +66,7 @@ fun Google(navController: NavController) {
                     text = "Continuar con Google",
                     style = TextStyle(
                         color = BlueGoogle,
-                        fontFamily =  FontFamily.SansSerif,
+                        fontFamily = FontFamily.SansSerif,
                         fontWeight = FontWeight.Bold,
                         fontSize = 25.sp
                     )

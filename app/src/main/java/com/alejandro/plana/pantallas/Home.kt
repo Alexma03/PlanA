@@ -7,8 +7,4 @@ import androidx.navigation.NavHostController
 import com.alejandro.plana.R
 
 @Composable
-fun HomeScreen(navController: NavHostController) {
-    Scaffold() {
-        
-    }
-}
+fun HomeScreen(navController: NavHostController) {}

@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.alejandro.plana.navigation.Navegacion
 import com.alejandro.plana.navigation.Routes
 import com.alejandro.plana.ui.theme.PlanATheme
 import com.alejandro.plana.pantallas.EmailLoginScreen
@@ -28,16 +29,12 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    val navigationController = rememberNavController()
-                    NavHost(navController = navigationController, startDestination = Routes.Login.route) {
-                        composable(Routes.Login.route) { LoginScreen(navigationController) }
-                        composable(Routes.Registro.route) { RegistroScreen(navigationController) }
-                        composable(Routes.Home.route) { HomeScreen(navigationController) }
-                        composable(Routes.EmailLogin.route) { EmailLoginScreen(navigationController) }
-                    }
+                    Navegacion()
                 }
             }
         }
+
     }
 }
+
 
