@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "74917773123",
+    "project_id": "plan-a-firebase",
+    "storage_bucket": "plan-a-firebase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:74917773123:android:598746b506185c60cf79f6",
+        "android_client_info": {
+          "package_name": "com.alejandro.plana"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "74917773123-d9vd8u82j2c7lvokfuuvvu1q6gbr32na.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.alejandro.plana",
+            "certificate_hash": "e73dcfb9cedf0be6287dc7a876db378ef2af2573"
+          }
+        },
+        {
+          "client_id": "74917773123-ofogj75g693bc1b9446ii41387sih2i7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbEuoskB3JLFkIeENcdUe_Uey-3NFgIBs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "74917773123-ofogj75g693bc1b9446ii41387sih2i7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
