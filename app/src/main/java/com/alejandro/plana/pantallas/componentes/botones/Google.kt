@@ -26,10 +26,39 @@ import androidx.navigation.NavController
 import com.alejandro.plana.R
 import com.alejandro.plana.navigation.Routes
 import com.alejandro.plana.ui.theme.BlueGoogle
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
 
 
 @Composable
 fun Google(navController: NavController) {
+
+    val context = LocalContext.current
+    val token = stringResource(R.string.default_web_client_id)
+
+    val launcher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.StartActivityForResult(),
+    ) {
+        val task =
+            try {
+                val account = GoogleSignIn.getSignedInAccountFromIntent(it.data)
+                    .getResult(ApiException::class.java)
+                val credential = GoogleAuthProvider.getCredential(account.idToken!!, null)
+                FirebaseAuth.getInstance().signInWithCredential(credential)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+
+                        }
+                    }
+            }
+            catch (e: ApiException) {
+                Log.w("TAG", "GoogleSign in Failed", e)
+            }
+    }
+
 
     Card(
         elevation = 15.dp,
@@ -39,8 +68,18 @@ fun Google(navController: NavController) {
             .padding(10.dp)
             .wrapContentSize(Alignment.Center)
             .fillMaxWidth()
-            .clickable(onClick = { navController.navigate(Routes.Home.route) })
-    ){
+            .clickable(onClick = {
+                val gso = GoogleSignInOptions
+                    .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                    .requestIdToken(token)
+                    .requestEmail()
+                    .requestId()
+                    .build()
+                val googleSignInClient = GoogleSignIn.getClient(context, gso)
+                launcher.launch(googleSignInClient.signInIntent)
+                navController.navigate(Routes.Home.route)
+            })
+    ) {
         Row(
             modifier = Modifier
                 .wrapContentHeight(Alignment.CenterVertically)

@@ -99,6 +99,9 @@ dependencies {
     //Coil
     implementation "io.coil-kt:coil-compose:2.2.2"
 
+    //OneTap Google
+    implementation 'com.github.stevdza-san:OneTapCompose:1.0.0'
+
 
 
 
