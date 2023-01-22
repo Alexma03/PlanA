@@ -1,5 +1,12 @@
 package com.alejandro.plana.objeto
 
+import android.content.Context
+import android.provider.Settings.Global.putString
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import androidx.compose.foundation.rememberSharedPref
+import androidx.compose.runtime.Composable
+
 class Persona (val usuario: String){
     var name: String = ""
         get() = field
@@ -31,5 +38,21 @@ class Persona (val usuario: String){
         this.email = email
         this.password = password
     }
+
+
+    fun Firebase (user: FirebaseUser?){
+        val user = FirebaseAuth.getInstance().currentUser
+        user?.getIdToken(true)?.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val idToken = task.result?.token
+            }
+
+
+
+
+        }
+
+    }
+
 
 }

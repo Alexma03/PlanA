@@ -1,6 +1,7 @@
 package com.alejandro.plana.pantallas.componentes.botones
 
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
@@ -51,6 +52,8 @@ fun Google(navController: NavController) {
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
 
+                        } else {
+                            Log.w("TAG", "signInWithCredential:failure", task.exception)
                         }
                     }
             }
@@ -77,7 +80,6 @@ fun Google(navController: NavController) {
                     .build()
                 val googleSignInClient = GoogleSignIn.getClient(context, gso)
                 launcher.launch(googleSignInClient.signInIntent)
-                navController.navigate(Routes.Home.route)
             })
     ) {
         Row(
