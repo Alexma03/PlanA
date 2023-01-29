@@ -28,12 +28,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.alejandro.plana.dataStore.LoginEmail
+import com.alejandro.plana.dataStore.RegisterUser
 import com.alejandro.plana.navigation.Routes
 import com.alejandro.plana.navigation.Routes.*
 import com.alejandro.plana.pantallas.componentes.ColorTextorequisitos
 import com.alejandro.plana.ui.theme.PlanA
 import com.alejandro.plana.pantallas.componentes.ImageLogo
 import com.alejandro.plana.pantallas.componentes.TextoRequisitos
+import kotlinx.coroutines.launch
 
 @Composable
 fun EmailLoginScreen(navController: NavController) {
@@ -54,6 +57,7 @@ fun EmailLogin(navController: NavController) {
     var email: String by rememberSaveable { mutableStateOf("") }
     var password: String by rememberSaveable { mutableStateOf("") }
     var isLoginEnable by rememberSaveable { mutableStateOf(false) }
+    val mantenerIniciada by rememberSaveable { mutableStateOf(false) }
 
     Surface(
         shape = RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp),
@@ -79,15 +83,16 @@ fun EmailLogin(navController: NavController) {
                 modifier = Modifier.align(Alignment.Start),
                 color = ColorTextorequisitos(password, 2)
             )
-            LoginButton(isLoginEnable, navController)
-            MantenerIniciada()
+            LoginButton(isLoginEnable, navController, mantenerIniciada)
+            MantenerIniciada(mantenerIniciada)
         }
     }
 }
 
 @Composable
-fun MantenerIniciada() {
+fun MantenerIniciada(mantenerIniciada: Boolean) {
     var state by rememberSaveable { mutableStateOf(false) }
+    state = mantenerIniciada
     Row(
         Modifier
             .fillMaxWidth(),
@@ -95,7 +100,7 @@ fun MantenerIniciada() {
         horizontalArrangement = Arrangement.Center
     ) {
         Checkbox(
-            checked = state,
+            checked = mantenerIniciada,
             onCheckedChange = { state = !state },
             enabled = true,
             colors = CheckboxDefaults.colors(
@@ -111,14 +116,23 @@ fun MantenerIniciada() {
 
     }
 
+    state = mantenerIniciada
+
+
+
 }
 
 @Composable
-fun LoginButton(loginEnable: Boolean, navController: NavController) {
+fun LoginButton(loginEnable: Boolean, navController: NavController, mantenerIniciada: Boolean) {
     val context = LocalContext.current
+    val scope = rememberCoroutineScope()
+    val dataStore = LoginEmail(context)
     Button(
         onClick = {
             navController.navigate(Home.route)
+            scope.launch {
+                dataStore.saveRemember(mantenerIniciada)
+            }
             Toast.makeText(
                 context, "Has sido registrado correctamente", Toast.LENGTH_SHORT
             ).show()

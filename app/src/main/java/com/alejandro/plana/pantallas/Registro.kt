@@ -35,9 +35,8 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.alejandro.plana.navigation.Routes
+import com.alejandro.plana.dataStore.RegisterUser
 import com.alejandro.plana.navigation.Routes.*
-import com.alejandro.plana.objeto.Persona
 import com.alejandro.plana.pantallas.componentes.ColorTextorequisitos
 import com.alejandro.plana.pantallas.componentes.ImageLogo
 import com.alejandro.plana.pantallas.componentes.TextoRequisitos
@@ -74,12 +73,6 @@ fun RegistroUsuario(navController: NavHostController) {
     val coroutineScope = rememberCoroutineScope()
     val focusManager = LocalFocusManager.current
     val bringIntoViewRequester = BringIntoViewRequester()
-
-    var usuario = Persona("", "", "", "")
-    usuario.name = name
-    usuario.email = email
-    usuario.password = password
-    usuario.codigoPostal = codigoPostal
 
     Surface(
         shape = RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp),
@@ -143,8 +136,10 @@ fun RegistroUsuario(navController: NavHostController) {
             )
             SignUpButton(
                 isSingUpEnable,
-                usuario.password,
-                usuario.name,
+                password,
+                name,
+                email,
+                codigoPostal,
                 repeatPaassword,
                 navController,
                 bringIntoViewRequester
@@ -258,11 +253,15 @@ fun SignUpButton(
     SignUpEnable: Boolean,
     password: String,
     name: String,
+    email: String,
+    codigoPostal: String,
     repeatPassword: String,
     navController: NavHostController,
     bringIntoViewRequester: BringIntoViewRequester
 ) {
     val context = LocalContext.current
+    val scope = rememberCoroutineScope()
+    val dataStore = RegisterUser(context)
     Button(
         onClick = {
             if (password != repeatPassword) {
@@ -271,6 +270,12 @@ fun SignUpButton(
                 ).show()
             } else {
                 navController.navigate(EmailLogin.route)
+                scope.launch {
+                    dataStore.saveName(name)
+                    dataStore.savePassword(password)
+                    dataStore.saveEmail(email)
+                    dataStore.savePostalCode(codigoPostal)
+                }
                 Toast.makeText(
                     context, "$name has sido registrado correctamente", Toast.LENGTH_SHORT
                 ).show()
